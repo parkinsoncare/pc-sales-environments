@@ -1,0 +1,43 @@
+version: '3'
+services:
+
+  rest:
+    image: opinionatedstack/rest-node
+    container_name: rest
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    networks:
+      - opsnet
+    stdin_open: true
+    tty: true
+
+  payments:
+    image: opinionatedstack/stripe-payments
+    container_name: payments
+    restart: unless-stopped
+    ports:
+      - 3001:3001
+    networks:
+      - opsnet
+    stdin_open: true
+    tty: true
+
+  web:
+    image: opinionatedstack/web-angular
+    container_name: web
+    restart: unless-stopped
+    depends_on:
+      - rest
+      - payments
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - opsnet
+    stdin_open: true
+    tty: true
+
+networks:
+  opsnet:
+
