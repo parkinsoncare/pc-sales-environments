@@ -3,7 +3,7 @@
   "containerDefinitions": [
     {
       "name": "web",
-      "image": "opinionatedstack/web-angular",
+      "image": "parkinsoncare/pc-sales-web-angular",
       "essential": true,
       "memory": 128,
       "portMappings": [
@@ -17,31 +17,18 @@
         }
       ],
       "links": [
-        "payments",
         "rest"
       ]
     },
     {
       "name": "rest",
-      "image": "opinionatedstack/rest-node",
+      "image": "parkinsoncare/pc-sales-rest-node",
       "essential": true,
       "memory": 128,
       "portMappings": [
         {
           "hostPort": 3000,
           "containerPort": 3000
-        }
-      ]
-    },
-    {
-      "name": "payments",
-      "image": "opinionatedstack/stripe-payments",
-      "essential": true,
-      "memory": 128,
-      "portMappings": [
-        {
-          "hostPort": 3001,
-          "containerPort": 3001
         }
       ]
     }
